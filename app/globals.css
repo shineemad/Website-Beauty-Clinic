@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@0,300;0,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  cursor: none;
+  background: #FCFAF8;
+  color: #1A1A1A;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-section].in-view.section-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+  }
+
+  ::selection {
+    background: rgba(213, 185, 125, 0.25);
+  }
+
+  /* ==================== ACCESSIBILITY ==================== */
+
+  /* Keyboard focus indicator - visible for keyboard users */
+  *:focus-visible {
+    outline: 2px solid #D5B97D;
+    outline-offset: 2px;
+  }
+
+  /* Ensure buttons and links are properly visible on focus */
+  button:focus-visible,
+  a:focus-visible,
+  [role='button']:focus-visible {
+    outline: 2px solid #D5B97D;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Reduce motion for users with prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    html {
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Improve focus visibility on input fields */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #D5B97D;
+    outline-offset: 2px;
+  }
+
+  /* Better color contrast for muted text if needed */
+  .text-muted {
+    color: #6d6560; /* Slightly darker for better contrast */
+  }
+
+  /* Skip to content link for keyboard navigation */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only:focus-visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    padding: 12px 16px;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    background: #D5B97D;
+    color: #1A1A1A;
+    z-index: [10000];
+    border-radius: 0 0 4px 0;
+    font-weight: 600;
+  }
+
+  /* Ensure custom cursor doesn't interfere with focus */
+  [data-cursor]:focus-visible {
+    outline: 2px solid #D5B97D;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* ==================== DECORATIVE & VISUAL ENHANCEMENTS ==================== */
+
+  /* Premium divider with gradient */
+  .divider-gradient {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      rgba(212, 201, 190, 0),
+      rgba(212, 201, 190, 0.4),
+      rgba(212, 201, 190, 0)
+    );
+  }
+
+  /* Gold accent line */
+  .accent-line {
+    position: relative;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      rgba(213, 185, 125, 0.3),
+      rgba(213, 185, 125, 1),
+      rgba(213, 185, 125, 0.3)
+    );
+  }
+
+  /* Subtle background gradient overlay */
+  .gradient-overlay {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      rgba(213, 185, 125, 0.02) 0%,
+      rgba(221, 190, 187, 0.02) 50%,
+      rgba(138, 130, 121, 0.01) 100%
+    );
+  }
+
+  /* Premium shadow */
+  .shadow-premium {
+    box-shadow: 0 8px 32px rgba(26, 26, 26, 0.1);
+  }
+
+  /* Subtle glow effect for gold */
+  .glow-gold {
+    box-shadow: 0 0 24px rgba(213, 185, 125, 0.15);
+  }
+
+  /* Focus glow for premium feel */
+  .focus-glow:focus-visible {
+    box-shadow: 0 0 16px rgba(213, 185, 125, 0.3);
+    outline: none;
+  }
+
+  /* Text gradient effect */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      #D5B97D 0%,
+      #DDBEBB 50%,
+      #D5B97D 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Image placeholder styles */
+  .image-placeholder {
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(
+      135deg,
+      rgba(213, 185, 125, 0.05) 0%,
+      rgba(221, 190, 187, 0.05) 50%,
+      rgba(138, 130, 121, 0.02) 100%
+    );
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .image-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(213, 185, 125, 0.1) 50%,
+      transparent 70%
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* SVG element animations */
+  .svg-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  /* Gallery grid optimization */
+  .gallery-item {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.05);
+  }
+
+  /* Before/after container */
+  .before-after-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+
+  .before-after-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(213, 185, 125, 0) 0%,
+      rgba(213, 185, 125, 0.1) 50%,
+      rgba(213, 185, 125, 0) 100%
+    );
+    animation: slideHorizontal 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes slideHorizontal {
+    0%, 100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+}
