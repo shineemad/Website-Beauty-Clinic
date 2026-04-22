@@ -80,6 +80,12 @@ export default function Treatments() {
       y: -999,
     });
 
+    // Set initial resting state for all rows (indented 16px),
+    // so first hover does not jump from an undefined transform.
+    gsap.set("[data-row-content]", { x: 16 });
+    gsap.set("[data-row-arrow]", { x: 0 });
+    gsap.set("[data-row-category]", { opacity: 0.7 });
+
     const follow = () => {
       currentXRef.current = lerp(currentXRef.current, targetXRef.current, 0.08);
       currentYRef.current = lerp(currentYRef.current, targetYRef.current, 0.08);
@@ -161,19 +167,57 @@ export default function Treatments() {
     const row = event.currentTarget;
     const content = row.querySelector<HTMLElement>("[data-row-content]");
     const number = row.querySelector<HTMLElement>("[data-row-number]");
+    const heading = row.querySelector<HTMLElement>("[data-row-heading]");
+    const category = row.querySelector<HTMLElement>("[data-row-category]");
+    const arrow = row.querySelector<HTMLElement>("[data-row-arrow]");
+    const divider = row.querySelector<HTMLElement>("[data-row-divider]");
 
     if (content) {
       gsap.to(content, {
         x: 0,
-        duration: 0.3,
-        ease: "power2.out",
+        duration: 0.5,
+        ease: "power3.out",
       });
     }
 
     if (number) {
       gsap.to(number, {
         color: "#D5B97D",
-        duration: 0.3,
+        duration: 0.35,
+        ease: "power2.out",
+      });
+    }
+
+    if (heading) {
+      gsap.to(heading, {
+        color: "#D5B97D",
+        duration: 0.45,
+        ease: "power2.out",
+      });
+    }
+
+    if (category) {
+      gsap.to(category, {
+        opacity: 1,
+        color: "#1A1A1A",
+        duration: 0.35,
+        ease: "power2.out",
+      });
+    }
+
+    if (arrow) {
+      gsap.to(arrow, {
+        x: 10,
+        duration: 0.45,
+        ease: "power3.out",
+      });
+    }
+
+    if (divider) {
+      gsap.to(divider, {
+        backgroundColor: "#D5B97D",
+        opacity: 0.6,
+        duration: 0.4,
         ease: "power2.out",
       });
     }
@@ -189,19 +233,57 @@ export default function Treatments() {
     const row = event.currentTarget;
     const content = row.querySelector<HTMLElement>("[data-row-content]");
     const number = row.querySelector<HTMLElement>("[data-row-number]");
+    const heading = row.querySelector<HTMLElement>("[data-row-heading]");
+    const category = row.querySelector<HTMLElement>("[data-row-category]");
+    const arrow = row.querySelector<HTMLElement>("[data-row-arrow]");
+    const divider = row.querySelector<HTMLElement>("[data-row-divider]");
 
     if (content) {
       gsap.to(content, {
         x: 16,
-        duration: 0.3,
-        ease: "power2.out",
+        duration: 0.5,
+        ease: "power3.out",
       });
     }
 
     if (number) {
       gsap.to(number, {
         color: "#8A8279",
-        duration: 0.3,
+        duration: 0.35,
+        ease: "power2.out",
+      });
+    }
+
+    if (heading) {
+      gsap.to(heading, {
+        color: "#1A1A1A",
+        duration: 0.45,
+        ease: "power2.out",
+      });
+    }
+
+    if (category) {
+      gsap.to(category, {
+        opacity: 0.7,
+        color: "#8A8279",
+        duration: 0.35,
+        ease: "power2.out",
+      });
+    }
+
+    if (arrow) {
+      gsap.to(arrow, {
+        x: 0,
+        duration: 0.45,
+        ease: "power3.out",
+      });
+    }
+
+    if (divider) {
+      gsap.to(divider, {
+        backgroundColor: "#E8E4DF",
+        opacity: 1,
+        duration: 0.4,
         ease: "power2.out",
       });
     }
@@ -224,18 +306,18 @@ export default function Treatments() {
 
         {treatments.map((treatment) => (
           <div key={treatment.number} className="relative">
-            <div className="h-[0.5px] w-full bg-[#E8E4DF]" />
+            <div data-row-divider className="h-[0.5px] w-full bg-[#E8E4DF]" />
 
             <div
               data-cursor="view"
               onMouseEnter={(event) => handleRowEnter(event, treatment)}
               onMouseMove={movePreview}
               onMouseLeave={handleRowLeave}
-              className="group"
+              className="group cursor-pointer"
             >
               <div
                 data-row-content
-                className="flex translate-x-4 items-center justify-between gap-8 py-10"
+                className="flex items-center justify-between gap-8 py-10 will-change-transform"
               >
                 <div className="flex min-w-0 items-center gap-6 lg:gap-10">
                   <span
@@ -245,16 +327,27 @@ export default function Treatments() {
                     {treatment.number}
                   </span>
 
-                  <h3 className="font-display text-[clamp(36px,4vw,64px)] font-light leading-[0.95] text-charcoal">
+                  <h3
+                    data-row-heading
+                    className="font-display text-[clamp(36px,4vw,64px)] font-light leading-[0.95] text-charcoal"
+                  >
                     {treatment.name}
                   </h3>
                 </div>
 
                 <div className="flex shrink-0 items-center gap-7 lg:gap-10">
-                  <span className="font-sans text-[11px] uppercase tracking-[0.15em] text-[#8A8279]">
+                  <span
+                    data-row-category
+                    className="font-sans text-[11px] uppercase tracking-[0.15em] text-[#8A8279]"
+                  >
                     {treatment.category}
                   </span>
-                  <span className="font-display text-[20px] leading-none text-gold">→</span>
+                  <span
+                    data-row-arrow
+                    className="inline-block font-display text-[20px] leading-none text-gold will-change-transform"
+                  >
+                    →
+                  </span>
                 </div>
               </div>
             </div>

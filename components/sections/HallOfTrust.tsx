@@ -169,144 +169,215 @@ export default function HallOfTrust() {
     };
   }, []);
 
+  const [featuredCard, ...supportingCards] = trustCards;
+
   return (
     <section
       ref={sectionRef}
-      className="bg-canvas px-[6vw] pb-[8vw] pt-[8vw] lg:px-[8vw] lg:pb-[8vw] lg:pt-[10vw]"
+      className="relative bg-canvas px-[6vw] pb-[10vw] pt-[10vw] lg:px-[8vw] lg:pb-[12vw] lg:pt-[12vw]"
     >
       <div className="mx-auto max-w-[1500px]">
-        <p className="font-sans text-[11px] uppercase tracking-[0.25em] text-gold">
-          DIPERCAYA OLEH
-        </p>
-        <h2 className="mb-16 mt-8 whitespace-pre-line font-display text-[clamp(40px,6.5vw,96px)] font-light leading-[0.92] text-charcoal lg:mb-24">
-          {"Ribuan Wajah,\nSatu Kepercayaan."}
-        </h2>
+        {/* Section intro — editorial header */}
+        <div className="grid grid-cols-12 gap-6 lg:gap-10">
+          <div className="col-span-12 lg:col-span-7">
+            <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-gold">
+              <span className="mr-3 text-charcoal/35">III</span>
+              DIPERCAYA OLEH
+            </p>
+            <h2 className="mt-8 whitespace-pre-line font-display text-[clamp(44px,6.8vw,104px)] font-light leading-[0.92] text-charcoal">
+              {"Ribuan Wajah,\nSatu Kepercayaan."}
+            </h2>
+          </div>
+          <div className="col-span-12 flex flex-col justify-end lg:col-span-5">
+            <div className="h-px w-full bg-charcoal/10" />
+            <p className="mt-6 max-w-[440px] font-sans text-[13px] leading-[1.85] tracking-[0.04em] text-muted lg:ml-auto">
+              Dari panggung layar hingga ruang kreatif — setiap wajah yang
+              memilih JGLOW menjadi bagian dari cerita perawatan yang personal
+              dan terukur.
+            </p>
+          </div>
+        </div>
 
-        <div
-          className="grid grid-cols-1 gap-6 lg:grid-cols-3"
-          style={{
-            gridTemplateAreas: '"A" "B" "C" "D"',
-          }}
-        >
-          {trustCards.map((card) => (
+        {/* Editorial portraits grid */}
+        <div className="mt-16 grid grid-cols-12 gap-5 lg:mt-24 lg:gap-6">
+          <article
+            data-trust-card
+            className="relative col-span-12 overflow-hidden rounded-[4px] bg-charcoal/5 lg:col-span-7 lg:row-span-2"
+          >
+            <div
+              data-trust-media
+              className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-[720px]"
+              style={{ backgroundColor: featuredCard.tone }}
+            >
+              <div className="absolute left-6 top-6 flex items-center gap-3">
+                <span className="inline-block h-[5px] w-[5px] rounded-full bg-gold" />
+                <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
+                  Featured · 2026
+                </span>
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/75 via-charcoal/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 lg:p-8">
+                <div>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.22em] text-canvas/70">
+                    {featuredCard.label}
+                  </p>
+                  <h3 className="mt-3 font-display text-[clamp(28px,3vw,44px)] font-light italic leading-[1.05] text-canvas">
+                    {featuredCard.name}
+                  </h3>
+                  <p className="mt-2 font-sans text-[11px] uppercase tracking-[0.14em] text-canvas/70">
+                    {featuredCard.role}
+                  </p>
+                </div>
+                <span className="hidden font-display text-[56px] font-light leading-none text-canvas/80 sm:block">
+                  01
+                </span>
+              </div>
+            </div>
+          </article>
+
+          {supportingCards.map((card, index) => (
             <article
               key={card.id}
               data-trust-card
-              className={`relative overflow-hidden rounded-[6px] border border-charcoal/5 shadow-[0_10px_30px_rgba(26,26,26,0.06)] ${card.heightClass}`}
-              style={{
-                gridArea: card.area,
-              }}
+              className="relative col-span-12 overflow-hidden rounded-[4px] bg-charcoal/5 sm:col-span-6 lg:col-span-5"
             >
               <div
                 data-trust-media
-                className="absolute inset-x-0 -top-[5%] h-[110%]"
+                className="relative aspect-[4/3] w-full lg:h-[348px]"
                 style={{ backgroundColor: card.tone }}
               >
-                <div className="flex h-full w-full items-start justify-end p-6">
-                  <span className="font-sans text-[10px] uppercase tracking-[0.14em] text-charcoal/40">
-                    {card.label}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-5 lg:p-6">
+                  <div>
+                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-canvas/70">
+                      {card.label}
+                    </p>
+                    <h3 className="mt-2 font-display text-[22px] font-light italic leading-[1.05] text-canvas">
+                      {card.name}
+                    </h3>
+                    <p className="mt-1.5 font-sans text-[10px] uppercase tracking-[0.14em] text-canvas/65">
+                      {card.role}
+                    </p>
+                  </div>
+                  <span className="font-display text-[34px] font-light leading-none text-canvas/70">
+                    0{index + 2}
                   </span>
                 </div>
-              </div>
-
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
-
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <h3 className="font-display text-[22px] italic text-canvas sm:text-[24px]">
-                  {card.name}
-                </h3>
-                <p className="mt-2 font-sans text-[11px] uppercase tracking-[0.12em] text-canvas/70">
-                  {card.role}
-                </p>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="mx-auto mt-20 max-w-[760px] text-center">
-          <p className="font-display text-[120px] leading-[0] text-gold">“</p>
-          <p className="mt-8 font-display text-[clamp(28px,3vw,46px)] font-light italic leading-[1.35] text-charcoal">
-            Pertama kalinya saya merasa nyaman dan percaya diri dengan kulit
-            saya. JGLOW bukan sekadar klinik - ini sanctuary.
-          </p>
-          <p className="mt-8 font-sans text-[12px] tracking-[0.15em] text-muted">
-            — Raisa A., Member sejak 2021
-          </p>
-        </div>
+        {/* Pull quote — editorial moment */}
+        <figure className="mx-auto mt-24 grid max-w-[1100px] grid-cols-12 gap-6 lg:mt-32">
+          <div className="col-span-12 flex items-start justify-center lg:col-span-1 lg:justify-end">
+            <span className="block font-display text-[80px] leading-[0.6] text-gold lg:text-[96px]">
+              “
+            </span>
+          </div>
+          <blockquote className="col-span-12 lg:col-span-10">
+            <p className="font-display text-[clamp(26px,3vw,44px)] font-light italic leading-[1.38] text-charcoal">
+              Pertama kalinya saya merasa nyaman dan percaya diri dengan kulit
+              saya. JGLOW bukan sekadar klinik — ini sanctuary.
+            </p>
+            <figcaption className="mt-8 flex items-center gap-4">
+              <span className="h-px w-10 bg-gold" />
+              <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-muted">
+                Raisa A. · Member sejak 2021
+              </span>
+            </figcaption>
+          </blockquote>
+          <div className="col-span-12 lg:col-span-1" />
+        </figure>
 
-        <div className="divider-gradient my-14 lg:my-16" />
-
-        <div data-reviews-wrap>
-          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.25em] text-gold">
+        {/* Reviews — editorial columns with hairlines */}
+        <div
+          data-reviews-wrap
+          className="mt-24 border-t border-charcoal/10 pt-12 lg:mt-32 lg:pt-16"
+        >
+          <div className="grid grid-cols-12 gap-6 lg:gap-10">
+            <div className="col-span-12 lg:col-span-5">
+              <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-gold">
+                <span className="mr-3 text-charcoal/35">IV</span>
                 REVIEW PELANGGAN
               </p>
-              <h3 className="mt-4 font-display text-[clamp(30px,4.5vw,58px)] font-light leading-[0.96] text-charcoal">
-                Suara Mereka Tentang JGLOW
+              <h3 className="mt-6 font-display text-[clamp(32px,4.2vw,64px)] font-light leading-[0.96] text-charcoal">
+                Suara Mereka
+                <br />
+                Tentang JGLOW
               </h3>
+              <p className="mt-6 max-w-[360px] font-sans text-[12.5px] leading-[1.85] tracking-[0.04em] text-muted">
+                Tiga cerita singkat dari perjalanan perawatan yang personal,
+                ditulis apa adanya.
+              </p>
             </div>
-            <p className="max-w-[420px] font-sans text-[12px] leading-[1.8] tracking-[0.05em] text-muted">
-              Pengalaman nyata dari pelanggan yang menjalani perawatan personal
-              bersama tim dokter JGLOW.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-            {customerReviews.map((review) => (
-              <article
-                key={review.id}
-                data-review-card
-                className="rounded-[6px] border border-charcoal/10 bg-canvas p-6 shadow-[0_8px_28px_rgba(26,26,26,0.06)]"
-              >
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="font-sans text-[10px] uppercase tracking-[0.14em] text-gold">
-                    {review.treatment}
-                  </span>
-                  <span
-                    className="font-sans text-[12px] text-charcoal/75"
-                    aria-label={`Rating ${review.rating} dari 5`}
+            <div className="col-span-12 lg:col-span-7">
+              <ul className="flex flex-col">
+                {customerReviews.map((review, idx) => (
+                  <li
+                    key={review.id}
+                    data-review-card
+                    className="group grid grid-cols-12 gap-4 border-t border-charcoal/10 py-8 first:border-t-0 first:pt-0 lg:gap-6 lg:py-10"
                   >
-                    {"★".repeat(review.rating)}
+                    <div className="col-span-12 flex items-center justify-between lg:col-span-2 lg:flex-col lg:items-start lg:justify-start lg:gap-6">
+                      <span className="font-display text-[28px] font-light leading-none text-charcoal/30 lg:text-[34px]">
+                        0{idx + 1}
+                      </span>
+                      <span
+                        className="font-sans text-[12px] tracking-[0.14em] text-gold"
+                        aria-label={`Rating ${review.rating} dari 5`}
+                      >
+                        {"★".repeat(review.rating)}
+                      </span>
+                    </div>
+
+                    <div className="col-span-12 lg:col-span-10">
+                      <p className="font-sans text-[10px] uppercase tracking-[0.22em] text-gold/90">
+                        {review.treatment}
+                      </p>
+                      <p className="mt-4 font-display text-[clamp(18px,1.6vw,22px)] font-light leading-[1.55] text-charcoal">
+                        “{review.text}”
+                      </p>
+                      <p className="mt-5 font-sans text-[11px] uppercase tracking-[0.18em] text-muted">
+                        — {review.name}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Cities — editorial strip */}
+        <div className="mt-24 border-t border-charcoal/10 pt-10 lg:mt-32 lg:pt-14">
+          <div className="mb-8 flex items-center gap-4">
+            <span className="h-px flex-1 bg-charcoal/10" />
+            <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-muted">
+              Tersedia di
+            </span>
+            <span className="h-px flex-1 bg-charcoal/10" />
+          </div>
+          <div className="flex flex-wrap items-baseline justify-center gap-x-5 gap-y-3 sm:gap-x-8">
+            {cities.map((city, index) => (
+              <div key={city} className="flex items-baseline gap-5 sm:gap-8">
+                <a
+                  href="#"
+                  className="font-display text-[clamp(24px,3.4vw,34px)] font-light italic text-[#C8C3BC] transition-colors duration-500 hover:text-charcoal"
+                >
+                  {city}
+                </a>
+                {index < cities.length - 1 ? (
+                  <span className="font-display text-[18px] text-gold/80">
+                    ·
                   </span>
-                </div>
-                <p className="font-sans text-[13px] leading-[1.75] text-charcoal/75">
-                  {review.text}
-                </p>
-                <p className="mt-6 font-sans text-[11px] uppercase tracking-[0.14em] text-muted">
-                  — {review.name}
-                </p>
-              </article>
+                ) : null}
+              </div>
             ))}
           </div>
         </div>
-
-        <div className="mt-20 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-5">
-          {cities.map((city, index) => (
-            <div key={city} className="flex items-center gap-4 sm:gap-5">
-              <a
-                href="#"
-                className="font-display text-[clamp(24px,3.5vw,32px)] font-light text-[#C8C3BC] transition-colors duration-300 hover:text-charcoal"
-              >
-                {city}
-              </a>
-              {index < cities.length - 1 ? (
-                <span className="font-display text-[24px] text-gold">·</span>
-              ) : null}
-            </div>
-          ))}
-        </div>
       </div>
-
-      <style jsx>{`
-        @media (min-width: 1024px) {
-          section > div > .grid {
-            grid-template-areas:
-              "A B B"
-              "A C D";
-          }
-        }
-      `}</style>
     </section>
   );
 }
