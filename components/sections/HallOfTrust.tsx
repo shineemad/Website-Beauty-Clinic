@@ -14,6 +14,7 @@ type TrustCard = {
   tone: string;
   area: string;
   heightClass: string;
+  image: string;
 };
 
 type CustomerReview = {
@@ -33,6 +34,8 @@ const trustCards: TrustCard[] = [
     tone: "#DDBEBB",
     area: "A",
     heightClass: "min-h-[560px] lg:min-h-[660px]",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1100&q=80&auto=format&fit=crop",
   },
   {
     id: "B",
@@ -42,6 +45,8 @@ const trustCards: TrustCard[] = [
     tone: "#D4C9BE",
     area: "B",
     heightClass: "min-h-[300px] lg:min-h-[320px]",
+    image:
+      "https://images.unsplash.com/photo-1529421308418-eab98863cee4?w=900&q=80&auto=format&fit=crop",
   },
   {
     id: "C",
@@ -51,6 +56,8 @@ const trustCards: TrustCard[] = [
     tone: "#E0D5CC",
     area: "C",
     heightClass: "min-h-[280px] lg:min-h-[320px]",
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=900&q=80&auto=format&fit=crop",
   },
   {
     id: "D",
@@ -60,6 +67,8 @@ const trustCards: TrustCard[] = [
     tone: "#C8BFB5",
     area: "D",
     heightClass: "min-h-[280px] lg:min-h-[320px]",
+    image:
+      "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=900&q=80&auto=format&fit=crop",
   },
 ];
 
@@ -209,6 +218,13 @@ export default function HallOfTrust() {
               className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-[720px]"
               style={{ backgroundColor: featuredCard.tone }}
             >
+              <img
+                src={featuredCard.image}
+                alt={featuredCard.name}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
               <div className="absolute left-6 top-6 flex items-center gap-3">
                 <span className="inline-block h-[5px] w-[5px] rounded-full bg-gold" />
                 <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
@@ -246,6 +262,13 @@ export default function HallOfTrust() {
                 className="relative aspect-[4/3] w-full lg:h-[348px]"
                 style={{ backgroundColor: card.tone }}
               >
+                <img
+                  src={card.image}
+                  alt={card.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-5 lg:p-6">
                   <div>

@@ -13,6 +13,7 @@ type ProductItem = {
   subtitle: string;
   price: string;
   tone: string;
+  image: string;
 };
 
 const products: ProductItem[] = [
@@ -21,30 +22,40 @@ const products: ProductItem[] = [
     subtitle: "Vitamin C Brightening",
     price: "Rp 485.000",
     tone: "#F0EAE4",
+    image:
+      "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=700&q=80&auto=format&fit=crop",
   },
   {
     name: "Barrier Repair Cream",
     subtitle: "Ceramide Restoration",
     price: "Rp 520.000",
     tone: "#E8E0DA",
+    image:
+      "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=700&q=80&auto=format&fit=crop",
   },
   {
     name: "Retinal Night Elixir",
     subtitle: "Advanced Renewal",
     price: "Rp 695.000",
     tone: "#F5F0EC",
+    image:
+      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700&q=80&auto=format&fit=crop",
   },
   {
     name: "Solar Guard SPF50+",
     subtitle: "Daily UV Defense",
     price: "Rp 320.000",
     tone: "#EDE7E1",
+    image:
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=700&q=80&auto=format&fit=crop",
   },
   {
     name: "Hydra Peptide Mist",
     subtitle: "Deep Hydration",
     price: "Rp 280.000",
     tone: "#F2EDE8",
+    image:
+      "https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=700&q=80&auto=format&fit=crop",
   },
 ];
 
@@ -133,17 +144,19 @@ export default function Products() {
               className="h-[380px] w-[250px] shrink-0 rounded-[2px] bg-canvas lg:mr-[3vw] lg:h-[400px] lg:w-[260px] lg:last:mr-0"
             >
               <div
-                className="h-[65%] px-6"
+                className="relative h-[65%] overflow-hidden"
                 style={{ backgroundColor: product.tone }}
               >
-                <div className="flex h-full flex-col items-center justify-center">
-                  <div className="relative w-24 h-24">
-                    <GoldenOrb className="drop-shadow-lg" />
-                  </div>
-                  <span className="mt-6 font-sans text-[10px] uppercase tracking-[0.12em] text-[#C0B8B0]">
-                    PREMIUM FORMULA
-                  </span>
-                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <span className="absolute left-5 top-5 font-sans text-[9px] uppercase tracking-[0.22em] text-canvas mix-blend-difference">
+                  Premium
+                </span>
               </div>
 
               <div className="flex h-[35%] flex-col px-6 py-6">

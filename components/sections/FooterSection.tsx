@@ -55,9 +55,22 @@ export default function FooterSection({ onBookingOpen }: FooterSectionProps) {
   return (
     <footer
       ref={sectionRef}
-      className="bg-charcoal px-[6vw] pb-[8vw] pt-[10vw] text-canvas lg:px-[8vw] lg:pb-[8vw] lg:pt-[12vw]"
+      className="relative overflow-hidden bg-charcoal px-[6vw] pb-[8vw] pt-[10vw] text-canvas lg:px-[8vw] lg:pb-[8vw] lg:pt-[12vw]"
     >
-      <div className="mx-auto max-w-[1500px]">
+      {/* Atmospheric background */}
+      <div className="pointer-events-none absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=1600&q=80&auto=format&fit=crop"
+          alt=""
+          aria-hidden
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover opacity-[0.14]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/85 to-charcoal" />
+      </div>
+
+      <div className="relative mx-auto max-w-[1500px]">
         <div className="text-center">
           <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-gold">
             SIAP UNTUK

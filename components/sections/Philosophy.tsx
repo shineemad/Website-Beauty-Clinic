@@ -92,6 +92,20 @@ export default function Philosophy() {
         </div>
 
         <aside className="lg:sticky lg:top-[30vh] lg:h-fit">
+          <div className="relative mb-10 overflow-hidden rounded-[3px] bg-rose/40">
+            <img
+              src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&q=80&auto=format&fit=crop"
+              alt="Ritual perawatan JGLOW"
+              loading="lazy"
+              decoding="async"
+              className="h-[320px] w-full object-cover lg:h-[360px]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
+            <span className="absolute bottom-5 left-5 font-sans text-[10px] uppercase tracking-[0.22em] text-canvas">
+              The Ritual · Chapter I
+            </span>
+          </div>
+
           <div className="space-y-0">
             {trustBadges.map((badge) => (
               <div key={badge.value} className="py-8 first:pt-0">

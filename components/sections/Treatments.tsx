@@ -9,6 +9,7 @@ type TreatmentRow = {
   name: string;
   category: string;
   tone: string;
+  image: string;
 };
 
 const treatments: TreatmentRow[] = [
@@ -17,36 +18,48 @@ const treatments: TreatmentRow[] = [
     name: "Signature Facial Glow",
     category: "Facial Care",
     tone: "#DDBEBB",
+    image:
+      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80&auto=format&fit=crop",
   },
   {
     number: "02",
     name: "Laser Brightening",
     category: "Laser Treatment",
     tone: "#E8DED5",
+    image:
+      "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&q=80&auto=format&fit=crop",
   },
   {
     number: "03",
     name: "Filler & Contouring",
     category: "Aesthetic Medicine",
     tone: "#D4C9BE",
+    image:
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80&auto=format&fit=crop",
   },
   {
     number: "04",
     name: "PRP Rejuvenation",
     category: "Regenerative Care",
     tone: "#C8BFB5",
+    image:
+      "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&q=80&auto=format&fit=crop",
   },
   {
     number: "05",
     name: "Body Sculpting",
     category: "Body Treatment",
     tone: "#E0D5CC",
+    image:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80&auto=format&fit=crop",
   },
   {
     number: "06",
     name: "Medical Skincare",
     category: "Skincare Prescription",
     tone: "#D8CECA",
+    image:
+      "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80&auto=format&fit=crop",
   },
 ];
 
@@ -122,6 +135,15 @@ export default function Treatments() {
 
     preview.style.backgroundColor = treatment.tone;
     preview.setAttribute("data-treatment", treatment.name);
+    const img = preview.querySelector<HTMLImageElement>("[data-preview-img]");
+    if (img && !img.src.includes(treatment.image)) {
+      img.src = treatment.image;
+      img.alt = treatment.name;
+    }
+    const label = preview.querySelector<HTMLElement>("[data-preview-label]");
+    if (label) {
+      label.textContent = treatment.name;
+    }
     isVisibleRef.current = true;
 
     gsap.to(preview, {
@@ -370,8 +392,18 @@ export default function Treatments() {
         ref={previewRef}
         className="pointer-events-none fixed left-0 top-0 z-[100] hidden h-[400px] w-[320px] overflow-hidden rounded-[4px] lg:block"
       >
-        <div className="flex h-full w-full items-end p-5">
-          <span className="font-sans text-[10px] uppercase tracking-[0.16em] text-charcoal/45">
+        <img
+          data-preview-img
+          src=""
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/65 via-transparent to-transparent" />
+        <div className="absolute inset-0 flex items-end p-5">
+          <span
+            data-preview-label
+            className="font-sans text-[10px] uppercase tracking-[0.18em] text-canvas"
+          >
             Hover Preview
           </span>
         </div>

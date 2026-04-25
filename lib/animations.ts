@@ -31,7 +31,7 @@ export const TIMING = {
   MICRO: 0.3,
 
   // Standard transitions
-  SHORT: 0.6,
+  SHORT: 0.8,
   MEDIUM: 0.8,
   LONG: 1.0,
 
